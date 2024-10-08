@@ -11,15 +11,25 @@ router.get("/signup", (req, res) => {
   return res.render("signup");
 });
 
+// Sign-in post route.
+router.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.matchPassword(email, password);
+
+  console.log("User", user);
+  return res.redirect("/");
+});
+
+// Sign-up post route.
 router.post("/signup", async (req, res) => {
-  const { fullName, email, passward } = req.body;
+  const { fullName, email, password } = req.body;
 
   await User.create({
     fullName,
     email,
-    passward,
+    password,
   });
-
   return res.redirect("/");
 });
 
