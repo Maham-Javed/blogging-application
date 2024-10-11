@@ -4,10 +4,12 @@ const { JsonWebTokenError } = require("jsonwebtoken");
 
 const router = Router();
 
+// Signin get route:
 router.get("/signin", (req, res) => {
   return res.render("signin");
 });
 
+// Signup get route:
 router.get("/signup", (req, res) => {
   return res.render("signup");
 });
@@ -36,6 +38,11 @@ router.post("/signup", async (req, res) => {
     password,
   });
   return res.redirect("/");
+});
+
+// Logout get route:
+router.get("/logout", (req, res) => {
+  res.clearCookie("token").redirect("/");
 });
 
 module.exports = router;
