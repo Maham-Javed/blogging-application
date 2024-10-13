@@ -5,9 +5,11 @@ const cookieParser = require("cookie-parser");
 
 // routes
 const userRoute = require("./routes/user");
+const blogRoute = require("./routes/blog");
+
 const {
   checkForAuthenticationCookie,
-} = require("./routes/middlewares/authentication");
+} = require("./middlewares/authentication");
 
 // Connecting MongoDB:
 mongoose
@@ -32,6 +34,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", userRoute);
+app.use("/blog", blogRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on PORT: ${PORT}`);
