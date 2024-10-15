@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 // routes
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
+const Blog = require("./modals/blog");
 
 const {
   checkForAuthenticationCookie,
@@ -26,10 +27,14 @@ app.set("views", path.resolve("./views"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
+app.use(express.static(path.resolve("./public"))); // serve our static content eg: public folder images.
 
-app.get("/", (req, res) => {
-  return res.render("home", {
+// render homepage
+app.get("/", async (req, res) => {
+  const allBlogs = await Blog.find({});
+  res.render("home", {
     user: req.user,
+    blogs: allBlogs,
   });
 });
 

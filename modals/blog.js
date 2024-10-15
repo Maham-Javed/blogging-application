@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
-const blogSchema =
-  ({
+const blogSchema = new Schema(
+  {
     title: {
       type: String,
       require: true,
@@ -19,7 +19,8 @@ const blogSchema =
       ref: "user",
     },
   },
-  { timestamps: true });
+  { timestamps: true }
+);
 
 const Blog = model("blog", blogSchema);
 
