@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -14,7 +16,7 @@ const {
 
 // Connecting MongoDB:
 mongoose
-  .connect("mongodb://127.0.0.1:27017/blogify")
+  .connect(process.env.MONGO_URL)
   .then((e) => console.log("MongoDB is connected!!"));
 
 const app = express();
